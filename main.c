@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-float calculateBMI(float *size, float *weight) //CALCULATE BMI
+float calculateBMI(__const float *size, __const float *weight) //CALCULATE BMI
 {
     float bmi = 0; //INIT VARIABLE BMI
 
@@ -60,22 +60,31 @@ void checkBMI(float bmi, char sex[]) //CHECK BMI BY CALCULATED BMI AND BY SEX
     }
 }
 
-
-int main() { //MAIL FUNCTION
-
-    float size = 1.5; //INPUT YOUR SIZE IN M
-    float weight = 50; //INPUT YOUR WEIGHT IN KG
-    float bmi; //VARIABLE FOR BMI
-    int age = 20; //INPUT YOUR AGE
-    char sex[7] = "female"; //INPUT YOUR SEX AS MALE OR FEMALE
+void printBMIresults(float size, float weight, int age, char sex[7]) //FUNCTION FOR PRINTING RESULTS
+{
+    float bmi = 0; //VARIABLE FOR BMI
 
     printf("------------------------------------------\n"); //OUTPUT SEPARATION
     printf("BMI - Body-Mass-Index-Calculator!\n"); //PRINT OUT PROGRAM TITLE
     printf("------------------------------------------\n"); //OUTPUT SEPARATION
-    bmi = calculateBMI(&size, &weight); // PRINT OUT YOUR BMI
-    checkoptimalBMI(age); // PRINT OUT YOUR OPTIMAL BMI
-    checkBMI(bmi, sex); // PRINT OUT YOU BMI-STATUS
+    bmi = calculateBMI(&size, &weight); // CALL FUNCTION TO CALCULATE YOUR BMI
+    checkoptimalBMI(age); // CALL FUNCTION TO CHECK YOUR OPTIMAL BMI
+    checkBMI(bmi, sex); // CALL FUNCTION TO CHECK YOU BMI-STATUS
     printf("------------------------------------------\n"); //OUTPUT SEPARATION
+}
+
+int main() { //MAIL FUNCTION
+
+    float size = 1.55; //INPUT YOUR SIZE IN M
+    float weight = 50; //INPUT YOUR WEIGHT IN KG
+    int age = 20; //INPUT YOUR AGE
+    char sex[7] = "female"; //INPUT YOUR SEX AS MALE OR FEMALE
+
+    printBMIresults(size, weight, age, sex); //CALL FUNCTION FOR PRINTING RESULTS
+    printBMIresults(1.7, 45, 27, "female"); //TESTCASE WOMEN: 1.7M; 45KG 27YEARS
+    printBMIresults(1.9, 131, 50, "male"); //TESTCASE MEN: 1.9M; 131KG 50YEARS
+    printBMIresults(1.81, 69, 77, "female"); //TESTCASE WOMEN: 1.81M; 69KG 77YEARS
+    printBMIresults(1.79, 87, 100, "male"); //TESTCASE MEN: 1.79M; 81KG 100YEARS
 
     return 0;
 }
